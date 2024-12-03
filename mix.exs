@@ -1,7 +1,7 @@
 defmodule Cluster.Mixfile do
   use Mix.Project
 
-  @version "4.0.0"
+  @version "4.0.1"
   @source_url "https://github.com/bitwalker/libcluster"
 
   def project do

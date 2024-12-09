@@ -1,5 +1,4 @@
 name: Elixir CI Checks
-
 env:
   DEBIAN_FRONTEND: noninteractive
   DEPENDENCY_FILE: mix.lock
@@ -10,11 +9,9 @@ env:
   REPOSITORY: libcluster
   RUNNER_OS: ubuntu20 # Must match Elixir/OTP version in described in action erlef/setup-beam@v1
   SHA: ${{ github.sha }}
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 on:
   push:
     branches:
@@ -24,11 +21,10 @@ on:
       - synchronize
       - opened
       - reopened
-
 jobs:
   static:
     name: Static Checks (Elixir ${{ matrix.elixir }} & OTP ${{ matrix.otp }})
-    runs-on: runs-on,runner=2cpu-linux-x64
+    runs-on: "runs-on/runner=2cpu-linux-x64/run-id=${{ github.run_id }}"
     outputs:
       HASH: ${{ steps.hash.outputs.HASH }}
     strategy:
@@ -99,7 +95,7 @@ jobs:
           mix hex.publish --dry-run
   test:
     name: Unit Tests (Elixir ${{ matrix.elixir }} & OTP ${{ matrix.otp }})
-    runs-on: runs-on,runner=2cpu-linux-x64
+    runs-on: "runs-on/runner=2cpu-linux-x64/run-id=${{ github.run_id }}"
     strategy:
       fail-fast: false
       matrix:
@@ -165,7 +161,7 @@ jobs:
   permit:
     name: Permit Package Publishing
     needs: [static, test]
-    runs-on: runs-on,runner=1cpu-linux-x64
+    runs-on: "runs-on/runner=1cpu-linux-x64/run-id=${{ github.run_id }}"
     outputs:
       PUBLISH: ${{ steps.version.outputs.PUBLISH }}
     steps:
@@ -211,11 +207,10 @@ jobs:
         with:
           path: approval.txt
           key: ${{ runner.os }}-${{ env.REPOSITORY }}-approval-${{ needs.static.outputs.HASH }}
-
   publish:
     name: Publish Hex Package
     needs: [permit]
-    runs-on: runs-on,runner=2cpu-linux-x64
+    runs-on: "runs-on/runner=2cpu-linux-x64/run-id=${{ github.run_id }}"
     if: needs.permit.outputs.PUBLISH == 'true' && github.event_name == 'push'
     steps:
       - name: Checkout latest codebase
@@ -247,10 +242,8 @@ jobs:
         run: |
           echo "Publishing package"
           mix hex.publish --yes
-
-
   check_release:
-    runs-on: runs-on,runner=2cpu-linux-x64
+    runs-on: "runs-on/runner=2cpu-linux-x64/run-id=${{ github.run_id }}"
     name: Check release
     container:
       image: elixir:1.13-slim

@@ -1,5 +1,4 @@
 name: Elixir Dev Publish
-
 env:
   DEBIAN_FRONTEND: noninteractive
   DEPENDENCY_FILE: mix.lock
@@ -10,19 +9,16 @@ env:
   REPOSITORY: libcluster
   RUNNER_OS: ubuntu20 # Must match Elixir/OTP version in described in action erlef/setup-beam@v1
   SHA: ${{ github.sha }}
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 on:
   workflow_dispatch:
     inputs: {}
-
 jobs:
   dev-publish:
     name: Dev Publish
-    runs-on: runs-on,runner=4cpu-linux-x64
+    runs-on: "runs-on/runner=4cpu-linux-x64/run-id=${{ github.run_id }}"
     steps:
       - name: Checkout latest codebase
         uses: actions/checkout@v4

@@ -53,6 +53,7 @@ defmodule Cluster.Mixfile do
   defp package do
     [
       files: ["lib", "mix.exs", "README.md", "LICENSE.md", "CHANGELOG.md"],
+      organization: :fresha,
       maintainers: ["Piotr Rybarczyk"],
       licenses: ["MIT"],
       links: %{

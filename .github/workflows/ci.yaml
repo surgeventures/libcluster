@@ -35,7 +35,7 @@ jobs:
         runner-os: [ubuntu20]
     steps:
       - name: Checkout latest codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ env.SHA }}
           clean: false
@@ -58,7 +58,7 @@ jobs:
           echo "HASH=$HASH" >> $GITHUB_OUTPUT
       - name: Hex auth
         run: mix hex.organization auth fresha --key ${{ secrets.HEX_ORGANIZATION_WRITE_KEY }}
-      - uses: runs-on/cache@v4
+      - uses: runs-on/cache@a5f51d6f3fece787d03b7b4e981c82538a0654ed # v4
         id: deps-cache
         with:
           path: |
@@ -73,7 +73,7 @@ jobs:
           echo "Installing dependencies"
           mix deps.get
           mix deps.compile
-      - uses: runs-on/cache@v4
+      - uses: runs-on/cache@a5f51d6f3fece787d03b7b4e981c82538a0654ed # v4
         id: build-cache
         with:
           path: '**/*'
@@ -104,7 +104,7 @@ jobs:
         runner-os: [ubuntu20]
     steps:
       - name: Checkout latest codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ env.SHA }}
           clean: false
@@ -127,7 +127,7 @@ jobs:
           echo "HASH=$HASH" >> $GITHUB_OUTPUT
       - name: Hex auth
         run: mix hex.organization auth fresha --key ${{ secrets.HEX_ORGANIZATION_WRITE_KEY }}
-      - uses: runs-on/cache@v4
+      - uses: runs-on/cache@a5f51d6f3fece787d03b7b4e981c82538a0654ed # v4
         id: deps-cache
         with:
           path: |
@@ -142,7 +142,7 @@ jobs:
           echo "Installing dependencies"
           mix deps.get
           mix deps.compile
-      - uses: runs-on/cache@v4
+      - uses: runs-on/cache@a5f51d6f3fece787d03b7b4e981c82538a0654ed # v4
         id: build-cache
         with:
           path: '**/*'
@@ -166,7 +166,7 @@ jobs:
       PUBLISH: ${{ steps.version.outputs.PUBLISH }}
     steps:
       - name: Checkout latest codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 2
           ref: ${{ env.SHA }}
@@ -203,7 +203,7 @@ jobs:
           echo ""
           echo "==============================================="
       - name: Cache Approval File
-        uses: runs-on/cache/save@v4
+        uses: runs-on/cache/save@a5f51d6f3fece787d03b7b4e981c82538a0654ed # v4
         with:
           path: approval.txt
           key: ${{ runner.os }}-${{ env.REPOSITORY }}-approval-${{ needs.static.outputs.HASH }}
@@ -214,7 +214,7 @@ jobs:
     if: needs.permit.outputs.PUBLISH == 'true' && github.event_name == 'push'
     steps:
       - name: Checkout latest codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ env.SHA }}
           clean: false
@@ -248,7 +248,7 @@ jobs:
     container:
       image: elixir:1.13-slim
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Install Dependencies
         run: |
           mix local.rebar --force

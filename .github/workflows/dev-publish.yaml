@@ -4,7 +4,7 @@ env:
   DEPENDENCY_FILE: mix.lock
   ELIXIR_VERSION: 1.13.0 # Elixir version used during package publishing
   JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-  OTP_VERSION: 23.3.4.7 # OTP version used during package publishing
+  OTP_VERSION: 24.3.4.17 # OTP version used during package publishing
   RELEVANT_FILES: "config lib test mix.exs mix.lock" # Important, this controls the caching, make sure to keep this right
   REPOSITORY: libcluster
   RUNNER_OS: ubuntu20 # Must match Elixir/OTP version in described in action erlef/setup-beam@fc68ffb90438ef2936bbb3251622353b3dcb2f93 # v1

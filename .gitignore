@@ -30,3 +30,6 @@ libcluster-*.tar
 !/priv/test/service_account/.gitkeep
 /libcluster.iml
 /.idea/
+
+# mise-action generated lockfile for pinned GitHub Actions
+.github/actions.lock.yaml

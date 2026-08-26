@@ -4,7 +4,7 @@ env:
   DEPENDENCY_FILE: mix.lock
   ELIXIR_VERSION: 1.13.0 # Elixir version used during package publishing
   JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-  OTP_VERSION: 23.3.4.7 # OTP version used during package publishing
+  OTP_VERSION: 24.3.4.17 # OTP version used during package publishing
   RELEVANT_FILES: "config lib test mix.exs mix.lock" # Important, this controls the caching, make sure to keep this right
   REPOSITORY: libcluster
   RUNNER_OS: ubuntu20 # Must match Elixir/OTP version in described in action erlef/setup-beam@fc68ffb90438ef2936bbb3251622353b3dcb2f93 # v1
@@ -49,14 +49,10 @@ jobs:
           key: ${{ runner.os }}-${{ env.REPOSITORY }}-approval-${{ steps.hash.outputs.HASH }}
           path: approval.txt
           fail-on-cache-miss: true
-      - name: Setup Elixir
-        uses: step-security/setup-beam@05e480cfdc64c72ab6c25b134dd1f57e29776c84 # v1.24.1
-        env:
-          ImageOS: ${{ env.RUNNER_OS }}
+      - name: Setup mise
+        uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
         with:
-          elixir-version: ${{ env.ELIXIR_VERSION }}
-          otp-version: ${{ env.OTP_VERSION }}
-          version-type: strict
+          version: '2026.8.12'
       - name: Hex auth
         run: mix hex.organization auth fresha --key ${{ secrets.HEX_ORGANIZATION_WRITE_KEY }}
         shell: bash

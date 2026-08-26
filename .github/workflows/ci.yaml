@@ -50,6 +50,10 @@ jobs:
         uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
         with:
           version: '2026.8.12'
+      - name: Install Hex + Rebar
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
       - name: Get SHA sum (HASH) of relevant files
         id: hash
         run: |
@@ -119,6 +123,10 @@ jobs:
         uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
         with:
           version: '2026.8.12'
+      - name: Install Hex + Rebar
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
       - name: Get SHA sum (HASH) of relevant files
         id: hash
         run: |
@@ -235,6 +243,10 @@ jobs:
         uses: step-security/mise-action@6e96d2ffbc65c037f23c78818f2a339d6cf830f7 # v4.2.4
         with:
           version: '2026.8.12'
+      - name: Install Hex + Rebar
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
       - name: Hex auth
         run: mix hex.organization auth fresha --key ${{ secrets.HEX_ORGANIZATION_WRITE_KEY }}
         shell: bash

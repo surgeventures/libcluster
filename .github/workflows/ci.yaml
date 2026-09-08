@@ -35,13 +35,13 @@ jobs:
         runner-os: [ubuntu20]
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2
         with:
           use-policy-store: true
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
 
       - name: Checkout latest codebase
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           ref: ${{ env.SHA }}
           clean: false
@@ -62,7 +62,7 @@ jobs:
           HASH="$(git ls-tree ${{ env.SHA }} -- ${{ env.RELEVANT_FILES }} | sha1sum | cut -d' ' -f1)"
           echo "BUILD HASH FOR THE CODEBASE IS: $HASH"
           echo "HASH=$HASH" >> $GITHUB_OUTPUT
-      - uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
+      - uses: step-security/runs-on-cache@e61ed9b0206c630e9a6bb5f12ca4cd78ae7bbe93 # v5.0.7
         id: deps-cache
         with:
           path: |
@@ -77,7 +77,7 @@ jobs:
           echo "Installing dependencies"
           mix deps.get
           mix deps.compile
-      - uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
+      - uses: step-security/runs-on-cache@e61ed9b0206c630e9a6bb5f12ca4cd78ae7bbe93 # v5.0.7
         id: build-cache
         with:
           path: '**/*'
@@ -108,13 +108,13 @@ jobs:
         runner-os: [ubuntu20]
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2
         with:
           use-policy-store: true
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
 
       - name: Checkout latest codebase
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           ref: ${{ env.SHA }}
           clean: false
@@ -135,7 +135,7 @@ jobs:
           HASH="$(git ls-tree ${{ env.SHA }} -- ${{ env.RELEVANT_FILES }} | sha1sum | cut -d' ' -f1)"
           echo "BUILD HASH FOR THE CODEBASE IS: $HASH"
           echo "HASH=$HASH" >> $GITHUB_OUTPUT
-      - uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
+      - uses: step-security/runs-on-cache@e61ed9b0206c630e9a6bb5f12ca4cd78ae7bbe93 # v5.0.7
         id: deps-cache
         with:
           path: |
@@ -150,7 +150,7 @@ jobs:
           echo "Installing dependencies"
           mix deps.get
           mix deps.compile
-      - uses: step-security/runs-on-cache@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
+      - uses: step-security/runs-on-cache@e61ed9b0206c630e9a6bb5f12ca4cd78ae7bbe93 # v5.0.7
         id: build-cache
         with:
           path: '**/*'
@@ -174,13 +174,13 @@ jobs:
       PUBLISH: ${{ steps.version.outputs.PUBLISH }}
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2
         with:
           use-policy-store: true
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
 
       - name: Checkout latest codebase
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           fetch-depth: 2
           ref: ${{ env.SHA }}
@@ -217,7 +217,7 @@ jobs:
           echo ""
           echo "==============================================="
       - name: Cache Approval File
-        uses: step-security/runs-on-cache/save@c5b0cba15d05488ebc630ad8d1e95b3d9b35ac73 # v5.0.7
+        uses: step-security/runs-on-cache/save@e61ed9b0206c630e9a6bb5f12ca4cd78ae7bbe93 # v5.0.7
         with:
           path: approval.txt
           key: ${{ runner.os }}-${{ env.REPOSITORY }}-approval-${{ needs.static.outputs.HASH }}
@@ -228,13 +228,13 @@ jobs:
     if: needs.permit.outputs.PUBLISH == 'true' && github.event_name == 'push'
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2
         with:
           use-policy-store: true
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
 
       - name: Checkout latest codebase
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           ref: ${{ env.SHA }}
           clean: false
@@ -269,12 +269,12 @@ jobs:
       image: elixir:1.13-slim
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2
         with:
           use-policy-store: true
           api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
 
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
       - name: Install Dependencies
         run: |
           mix local.rebar --force
